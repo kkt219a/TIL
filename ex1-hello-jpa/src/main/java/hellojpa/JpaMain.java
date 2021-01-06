@@ -92,6 +92,16 @@ public class JpaMain {
 //            Member member2 = em.find(Member.class, 150L);
 //            System.out.println("===============");
 
+
+//            //ENUM TEST
+            Member member = new Member();
+            member.setUsername("C");
+            System.out.println("JpaMain.main");
+            member.setRoleType(RoleType.ADMIN);
+            em.persist(member);
+            System.out.println("JpaMain.main");
+
+
             tx.commit();
         }catch(Exception e){
             tx.rollback();
