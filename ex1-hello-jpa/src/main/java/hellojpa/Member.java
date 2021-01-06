@@ -6,41 +6,18 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@SequenceGenerator( name="member_seq_generator",
-sequenceName = "member_seq",
-initialValue = 1, allocationSize = 1)
 public class Member {
 
-//    @Id
-//    private Long id;
-//    private String name;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq")
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "USERNAME")
     private String username;
 
-    private Integer age;
-
-    @Enumerated(EnumType.STRING)
-    private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    private LocalDate test1; //연,월,일
-    private LocalDateTime test2; // 연월일 시간
-
-    @Lob
-    private String description;
-
-    public Member(){}
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
     public Long getId() {
         return id;
@@ -58,32 +35,11 @@ public class Member {
         this.username = username;
     }
 
-    public RoleType getRoleType() {
-        return roleType;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
+    public void setTeam(Team team) {
+        this.team = team;
     }
-
-//    public Member(Long id, String name) {
-//        this.id = id;
-//        this.name = name;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    public void setName(String name) {
-//        this.name = name;
-//    }
 }

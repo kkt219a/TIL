@@ -94,13 +94,34 @@ public class JpaMain {
 
 
 //            //ENUM TEST
-            Member member = new Member();
-            member.setUsername("C");
-            System.out.println("JpaMain.main");
-            member.setRoleType(RoleType.ADMIN);
-            em.persist(member);
-            System.out.println("JpaMain.main");
+//            Member member = new Member();
+//            member.setUsername("C");
+//            System.out.println("JpaMain.main");
+//            member.setRoleType(RoleType.ADMIN);
+//            em.persist(member);
+//            System.out.println("JpaMain.main");
 
+
+            //단방향 연관관계
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
+            Member member = new Member();
+            member.setUsername("member1");
+            member.setTeam(team); //단방향 연관관계 설정, 참조 저장
+            em.persist(member);
+
+            em.flush();
+            em.clear();
+
+            Member findMember = em.find(Member.class, member.getId());
+            Team findTeam = findMember.getTeam();
+            System.out.println("findTeam = " + findTeam.getName());
+
+            //팀 바꿔주기
+            //Team newTeam = em.find(Team.class,100L);
+            //findMember.setTeam(newTeam);
 
             tx.commit();
         }catch(Exception e){
