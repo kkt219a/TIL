@@ -102,28 +102,43 @@ public class JpaMain {
 //            System.out.println("JpaMain.main");
 
 
-            //단방향 연관관계
+//            //단방향 연관관계
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setTeam(team); //단방향 연관관계 설정, 참조 저장
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
+
+//            Member findMember = em.find(Member.class, member.getId());
+//            Team findTeam = findMember.getTeam();
+//            System.out.println("findTeam = " + findTeam.getName());
+//            //팀 바꿔주기
+//            Team newTeam = em.find(Team.class,100L);
+//            findMember.setTeam(newTeam);
+
+//            Member findMember = em.find(Member.class, member.getId());
+//            List<Member> members = findMember.getTeam().getMembers();
+//            for (Member m : members) {
+//                System.out.println("m.getUsername() = " + m.getUsername());
+//            }
+
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
-
-            Member member = new Member();
+            Member member =new Member();
             member.setUsername("member1");
-            member.setTeam(team); //단방향 연관관계 설정, 참조 저장
+            team.getMembers().add(member);
+            member.setTeam(team);
             em.persist(member);
 
-            em.flush();
-            em.clear();
-
-            Member findMember = em.find(Member.class, member.getId());
-            Team findTeam = findMember.getTeam();
-            System.out.println("findTeam = " + findTeam.getName());
-
-            //팀 바꿔주기
-            //Team newTeam = em.find(Team.class,100L);
-            //findMember.setTeam(newTeam);
-
             tx.commit();
+
         }catch(Exception e){
             tx.rollback();
         }finally {
