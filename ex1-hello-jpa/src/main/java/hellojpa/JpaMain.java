@@ -128,14 +128,24 @@ public class JpaMain {
 //                System.out.println("m.getUsername() = " + m.getUsername());
 //            }
 
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-            Member member =new Member();
+
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//            Member member =new Member();
+//            member.setUsername("member1");
+//            team.getMembers().add(member);
+//            member.setTeam(team);
+//            em.persist(member);
+
+            Member member = new Member();
             member.setUsername("member1");
-            team.getMembers().add(member);
-            member.setTeam(team);
             em.persist(member);
+
+            Team team = new Team();
+            team.setName("teamA");
+            team.getMembers().add(member);
+            em.persist(team);
 
             tx.commit();
 
