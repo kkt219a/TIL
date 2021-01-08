@@ -161,28 +161,43 @@ public class JpaMain {
 //            Movie findMovie = em.find(Movie.class, movie.getId());
 //            System.out.println("findMovie = " + findMovie);
 
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
-            Team team2 = new Team();
-            team.setName("team2");
-            em.persist(team2);
+//            Team team = new Team();
+//            team.setName("teamA");
+//            em.persist(team);
+//            Team team2 = new Team();
+//            team.setName("team2");
+//            em.persist(team2);
+//
+//            Member member = new Member();
+//            member.setUsername("hello");
+//            member.setTeam(team);
+//            em.persist(member);
+//            Member member2 = new Member();
+//            member2.setUsername("hello2");
+//            member2.setTeam(team2);
+//            em.persist(member2);
+//
+//            em.flush();
+//            em.clear();
+//
+//            List<Member> members = em.createQuery("select m from Member m", Member.class)
+//                    .getResultList();
 
-            Member member = new Member();
-            member.setUsername("hello");
-            member.setTeam(team);
-            em.persist(member);
-            Member member2 = new Member();
-            member2.setUsername("hello2");
-            member2.setTeam(team2);
-            em.persist(member2);
+            Child child1 = new Child();
+            Child child2 = new Child();
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
 
             em.flush();
             em.clear();
 
-            List<Member> members = em.createQuery("select m from Member m", Member.class)
-                    .getResultList();
-
+            Parent findParent = em.find(Parent.class, parent.getId());
+            //findParent.getChildList().remove(0);
+            em.remove(findParent);
+            
             tx.commit();
 
         }catch(Exception e){

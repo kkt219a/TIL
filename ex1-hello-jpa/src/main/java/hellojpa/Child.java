@@ -13,6 +13,14 @@ public class Child {
     @JoinColumn(name="parent_id")
     private Parent parent;
 
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
+    }
+
     public Long getId() {
         return id;
     }
