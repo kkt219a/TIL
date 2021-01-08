@@ -17,12 +17,12 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-    @OneToOne
-    @JoinColumn(name="LOCKER_ID")
-    private Locker locker;
+//    @OneToOne
+//    @JoinColumn(name="LOCKER_ID")
+//    private Locker locker;
 
-    @OneToMany(mappedBy = "member")
-    private List<MemberProduct> memberProducts = new ArrayList<>();
+//    @OneToMany(mappedBy = "member")
+//    private List<MemberProduct> memberProducts = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -39,5 +39,6 @@ public class Member {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
 }
