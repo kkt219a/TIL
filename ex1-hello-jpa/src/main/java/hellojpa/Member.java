@@ -17,12 +17,17 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-//    @OneToOne
-//    @JoinColumn(name="LOCKER_ID")
-//    private Locker locker;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn
+    private Team team;
 
-//    @OneToMany(mappedBy = "member")
-//    private List<MemberProduct> memberProducts = new ArrayList<>();
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     public Long getId() {
         return id;

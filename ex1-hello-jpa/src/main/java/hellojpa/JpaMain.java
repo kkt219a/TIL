@@ -161,21 +161,27 @@ public class JpaMain {
 //            Movie findMovie = em.find(Movie.class, movie.getId());
 //            System.out.println("findMovie = " + findMovie);
 
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+            Team team2 = new Team();
+            team.setName("team2");
+            em.persist(team2);
 
             Member member = new Member();
             member.setUsername("hello");
+            member.setTeam(team);
             em.persist(member);
+            Member member2 = new Member();
+            member2.setUsername("hello2");
+            member2.setTeam(team2);
+            em.persist(member2);
+
             em.flush();
             em.clear();
 
-            Member findMember = em.getReference(Member.class, member.getId());
-            System.out.println("findMember.getClass() = " + findMember.getClass());
-
-            findMember.getUsername();
-            //로딩확인
-            System.out.println("isLoaded" + emf.getPersistenceUnitUtil().isLoaded(findMember));
-            //강제초기화
-            Hibernate.initialize(findMember);
+            List<Member> members = em.createQuery("select m from Member m", Member.class)
+                    .getResultList();
 
             tx.commit();
 
