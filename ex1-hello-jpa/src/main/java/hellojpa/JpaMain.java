@@ -3,6 +3,9 @@ package hellojpa;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.Set;
 
@@ -212,25 +215,25 @@ public class JpaMain {
 //            member.setHomeAddress(newAddress);
 
 
-            //저장 예제
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setHomeAddress(new Address("city1","street1","zipcode1"));
-
-            member.getFavoriteFoods().add("치킨");
-            member.getFavoriteFoods().add("족발");
-            member.getFavoriteFoods().add("피자");
-
-            member.getAddressHistory().add(new AddressEntity("old1","street1","zipcode1"));
-            member.getAddressHistory().add(new AddressEntity("old2","street1","zipcode1"));
-            em.persist(member);
-
-            em.flush();
-            em.clear();
-
-            //조회 예제
-            System.out.println("=====");
-            Member findMember = em.find(Member.class, member.getId());
+//            //저장 예제
+//            Member member = new Member();
+//            member.setUsername("member1");
+//            member.setHomeAddress(new Address("city1","street1","zipcode1"));
+//
+//            member.getFavoriteFoods().add("치킨");
+//            member.getFavoriteFoods().add("족발");
+//            member.getFavoriteFoods().add("피자");
+//
+//            member.getAddressHistory().add(new AddressEntity("old1","street1","zipcode1"));
+//            member.getAddressHistory().add(new AddressEntity("old2","street1","zipcode1"));
+//            em.persist(member);
+//
+//            em.flush();
+//            em.clear();
+//
+//            //조회 예제
+//            System.out.println("=====");
+//            Member findMember = em.find(Member.class, member.getId());
 
 //            //homeCity ->new City 수정
 //            Address a = findMember.getHomeAddress();
@@ -243,6 +246,18 @@ public class JpaMain {
 //            //주소 변경, 완전히 똑같은 걸 찾아서(Member class내부에 equals 오버라이드 필수!!) 제거 후 추가, 순서는 항상 보장되지 않지만 결과는 동일
 //            findMember.getAddressHistory().remove(new Address("old1","street1","zipcode1"));
 //            findMember.getAddressHistory().add(new Address("newCity1","street1","zipcode1"));
+
+
+            //Criteria 사용 준비
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+
+            //루트 클래스 (조회를 시작할 클래스)
+            Root<Member> m = query.from(Member.class);
+
+            //쿼리 생성
+            CriteriaQuery<Member> cq =  query.select(m).where(cb.equal(m.get("username"), "kim"));
+            List<Member> resultList = em.createQuery(cq).getResultList();
 
             tx.commit();
 
