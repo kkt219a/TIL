@@ -199,11 +199,16 @@ public class JpaMain {
 //            //findParent.getChildList().remove(0);
 //            em.remove(findParent);
 
+
+            Address address = new Address("city", "street", "zipcode");
+
             Member member = new Member();
-            member.setUsername("hello");
-            member.setAddress(new Address("city","street","zipcode"));
-            member.setWorkPeriod(new Period());
+            member.setUsername("member1");
+            member.setAddress(address);
             em.persist(member);
+
+            Address newAddress = new Address("NewCity", address.getStreet(), address.getZipcode());
+            member.setAddress(newAddress);
 
             tx.commit();
 
