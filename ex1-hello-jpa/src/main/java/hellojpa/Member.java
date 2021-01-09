@@ -17,17 +17,24 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn
-    private Team team;
+    //Period ㄱㅣ간
+    @Embedded
+    private Period workPeriod;
 
-    public Team getTeam() {
-        return team;
-    }
+    //주소
+    @Embedded
+    private Address address;
 
-    public void setTeam(Team team) {
-        this.team = team;
-    }
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name="city",
+            column=@Column(name="WORK_CITY")),
+            @AttributeOverride(name="street",
+            column=@Column(name="WORK_STREET")),
+            @AttributeOverride(name="zipcode",
+            column=@Column(name="WORK_ZIPCODE")),
+    })
+    private Address address2;
 
     public Long getId() {
         return id;
@@ -45,5 +52,19 @@ public class Member {
         this.username = username;
     }
 
+    public Period getWorkPeriod() {
+        return workPeriod;
+    }
 
+    public void setWorkPeriod(Period workPeriod) {
+        this.workPeriod = workPeriod;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }
