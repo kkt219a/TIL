@@ -34,10 +34,19 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            String query ="select coalesce(m.username,'이름 없는 회원') from Member m ";
-            String query2 ="select nullif(m.username,'관리자') from Member m ";
-            List<String> result = em.createQuery(query2, String.class)
+
+            String query0 = "select concat('a','b') From Member m"; //ab 출력
+            String query1 = "select substring(m.username,2,3) From Member m";
+            String query2 = "select locate('de','abcdef') From Member m"; // 4출력
+            String query3 = "select size(t.members) From Team t"; // 1출력
+
+            String query = "select function('group_concat',m.username) From Member m"; // 1출력
+
+
+
+            List<String> result = em.createQuery(query, String.class)
                     .getResultList();
+
             for (String s : result) {
                 System.out.println("s = " + s);
             }
