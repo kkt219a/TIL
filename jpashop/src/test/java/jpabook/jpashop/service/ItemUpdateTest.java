@@ -23,6 +23,6 @@ public class ItemUpdateTest {
         //TX
         book.setName("asdadffd");
 
-        //TX commit
+        //TX commit, 변경감지 == dirty checking
     }
 }
