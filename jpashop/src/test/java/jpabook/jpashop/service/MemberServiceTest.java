@@ -1,16 +1,13 @@
 package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.repository.MemberRepository;
+import jpabook.jpashop.repository.MemberRepositoryold;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
 
 import static org.junit.Assert.*;
 
@@ -20,7 +17,8 @@ import static org.junit.Assert.*;
 public class MemberServiceTest {
 
     @Autowired MemberService memberService;
-    @Autowired MemberRepository memberRepository;
+    @Autowired
+    MemberRepositoryold memberRepositoryold;
 
     @Test
     public void 회원가입() throws Exception {
@@ -32,7 +30,7 @@ public class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         //then
-        assertEquals(member,memberRepository.findOne(savedId));
+        assertEquals(member, memberRepositoryold.findOne(savedId));
     }
 
     @Test(expected = IllegalStateException.class)
