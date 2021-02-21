@@ -1,4 +1,4 @@
-package me.whiteship.java8to11;
+package me.whiteship.java8to11.pr2_1;
 
 
 @FunctionalInterface
