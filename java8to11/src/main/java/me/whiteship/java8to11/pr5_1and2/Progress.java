@@ -1,4 +1,4 @@
-package me.whiteship.java8to11.pr5_1;
+package me.whiteship.java8to11.pr5_1and2;
 
 import java.time.Duration;
 

@@ -1,6 +1,5 @@
-package me.whiteship.java8to11.pr5_1;
+package me.whiteship.java8to11.pr5_1and2;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
