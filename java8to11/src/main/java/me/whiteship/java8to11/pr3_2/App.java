@@ -48,7 +48,7 @@ public class App {
         name.sort(compareToIgnoreCase.reversed().thenComparing(String::compareTo));
         System.out.println("==========");
         name.forEach(System.out::println);
-        
+
     }
 
 }
