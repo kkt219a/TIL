@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * jsp패턴 - 1
+ */
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Member {

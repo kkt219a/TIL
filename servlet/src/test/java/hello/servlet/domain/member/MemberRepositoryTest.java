@@ -9,6 +9,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * jsp패턴 - 1
+ */
+
 class MemberRepositoryTest {
     // 싱글톤이니까~~ 스프링 쓰면 상관x
     MemberRepository memberRepository = MemberRepository.getInstance();
