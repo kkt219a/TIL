@@ -3,6 +3,9 @@ package hello.servlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
  * 서블릿 파트 - 2
@@ -16,5 +19,12 @@ public class ServletApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ServletApplication.class, args);
 	}
+
+	// 뷰 리졸버가 이런식으로 등록해서 사용한다. application.properties에
+	// suffix, prefix를!
+//	@Bean
+//	ViewResolver internalResourceViewResolver(){
+//		return new InternalResourceViewResolver("/WEB-INF/views/",".jsp");
+//	}
 
 }
